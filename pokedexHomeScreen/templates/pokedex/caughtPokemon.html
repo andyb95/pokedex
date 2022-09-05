@@ -1,0 +1,21 @@
+<a href="{% url 'pokedex:index' %}">Find more Pokemon!</a>
+<h1>Caught Pokemon</h1>
+<ul>
+{% for pokemon in caughtPokemon.all %}
+    <li>
+        <form action="{% url 'pokedex:releasePokemon' pokemon.id %}" method="delete">
+            {% csrf_token %}
+            <img src="{{ pokemon.image }}" alt="caughtPokemon"/>
+            <h2>{{ pokemon.name }}</h2>
+            <button type="submit" name="releasePokemon">Release {{ pokemon.name }}</button>
+        </form>
+        <form action="{% url 'pokedex:renamePokemon' pokemon.id %}" method="post">
+            {% csrf_token %}
+            <input type="text" id="newName" name="renamePokemon">
+            <input type="submit" value="Rename {{ pokemon.name }}">
+                <!-- <button type="submit">Rename {{ pokemon.name }}</button>
+            </input> -->
+        </form>    
+    </li>
+{% endfor %}
+</ul>

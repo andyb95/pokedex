@@ -1,0 +1,17 @@
+<head>
+    {% load static %}
+    <link rel="icon" href="{% static 'images/pokeball.png' %}"/>
+    <title>Pokedex</title>
+</head>
+
+<a href="{% url 'pokedex:caughtPokemon' %}">View Caught Pokemon</a>
+<h1>Wild Pokemon!</h1>
+<div>
+    <img src="{{ pokemon.image }}" alt="wildPokemon"/>
+    <h2>{{ pokemon.name }}</h2>
+</div>
+
+<form action="{% url 'pokedex:catchPokemon' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" name="catchPokemon" value="{{ pokemon }}">Catch {{ pokemon.name }}</button>
+</form>
